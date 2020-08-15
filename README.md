@@ -2,6 +2,10 @@
 
 This program allows you to host custom package repository for [PS4 Homebrew Store](https://orbismandl.darksoftware.xyz/store.pkg).
 
+## Installation
+
+Before using this program you must run `download.sh` (`download.bat` on Windows) to download the required files from the official CDN.
+
 ## Usage
 
 From the directory containing `hbstore.py` file, run:
@@ -29,3 +33,5 @@ CDN=http://yourip
 ```
 
 Then insert a USB drive with this file into the left USB port of the PS4 and start the application.
+
+**Note**: you only need to do this once. If you want to use the original CDN, upload another settings.ini with `CDN=http://orbismandl.darksoftware.xyz`.
