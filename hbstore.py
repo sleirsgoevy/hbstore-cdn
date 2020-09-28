@@ -1,7 +1,10 @@
 import os.path, sys, http.server, socketserver, re, json
 from collections import OrderedDict as odict
 
-pkgs = [i for i in os.listdir(sys.argv[1]) if i.endswith('.pkg')]
+pkg_path = os.path.abspath(sys.argv[1])
+os.chdir(os.path.split(__file__)[0])
+
+pkgs = [i for i in os.listdir(pkg_path) if i.endswith('.pkg')]
 
 def pkg_titleid(name):
     match = re.match('[A-Z]{2}[0-9]{4}-([A-Z]{4}[0-9]{5})_[0-9]{2}-[A-Z0-9]{16}(-A[0-9]{4}-V[0-9]{4})?.pkg', name)
@@ -108,6 +111,6 @@ class Handler(http.server.BaseHTTPRequestHandler):
             if idx not in range(len(pkgs)):
                 self.send_error(404)
                 return
-            self.send_file(sys.argv[1]+'/'+pkgs[idx])
+            self.send_file(pkg_path+'/'+pkgs[idx])
 
 http.server.HTTPServer(('', 80), Handler).serve_forever()
